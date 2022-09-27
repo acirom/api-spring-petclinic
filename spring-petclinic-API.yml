@@ -10,7 +10,7 @@ metadata:
     - vet
     - visit
   links:
-    - url: http://spring-petclinic.cnr.tap.tanzu.vxlab.local
+    - url: http://spring-petclinic.cnr.tap.tanzu.vxlab.local/api
       title: GitHub Repo
       icon: github
 spec:
@@ -26,7 +26,7 @@ info:
     url: http://www.apache.org/licenses/LICENSE-2.0
   version: '1.0'
 servers:
-- url: https://github.com/acirom/api-spring-petclinic/blob/main/petclinic.yml
+- url: http://spring-petclinic.cnr.tap.tanzu.vxlab.local/api
 tags:
 - name: failing
   description: Endpoint which always returns an error.
