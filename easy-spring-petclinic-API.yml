@@ -55,11 +55,6 @@ spec:
             schema:
               type: string
               example: Davis
-          - name: If-None-Match
-            in: header
-            description: A list of ETags of the responses the client has cached.
-            schema:
-              type: string
           responses:
             200:
               description: Owner details found and returned.
@@ -73,7 +68,7 @@ spec:
                   schema:
                     type: array
                     items:
-                      $ref: '#/owner'
+                      $ref: '#/components/schema/OwnerFields'
     components:
       schemas:
         OwnerFields:
@@ -125,28 +120,3 @@ spec:
             - address
             - city
             - telephone
-        Owner:
-          title: Owner
-          description: A pet owner.
-          allOf:
-            - $ref: '#/components/schemas/OwnerFields'
-            - type: object
-              properties:
-                id:
-                  title: ID
-                  description: The ID of the pet owner.
-                  type: integer
-                  format: int32
-                  minimum: 0
-                  example: 1
-                  readOnly: true
-                pets:
-                  title: Pets
-                  description: The pets owned by this individual including any booked vet visits.
-                  type: array
-                  items:
-                    $ref: '#/components/schemas/Pet'
-                  readOnly: true
-              required: 
-              - id
-              - pets
