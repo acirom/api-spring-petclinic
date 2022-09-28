@@ -66,11 +66,7 @@ spec:
               content:
                 text/html:
                   schema:
-                    type: string
-                  examples:
-                    html:
-                      summary: A list containing two items
-                      value: '<html><body><ul><li>$ref: '#/components/schemas/OwnerFields/properties/firstName'</li><li>$ref: '#/components/schemas/OwnerFields/properties/lastName'</li></ul></body></html>'
+                    $ref: '#/components/schemas/OwnerFields'
                 application/xml:
                   schema:
                     $ref: '#/components/schemas/OwnerFields'
