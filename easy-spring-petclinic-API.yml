@@ -68,7 +68,7 @@ spec:
                   schema:
                     type: array
                     items:
-                      $ref: '#/components/schema/OwnerFields'
+                      $ref: '#/components/schemas/OwnerFields'
     components:
       schemas:
         OwnerFields:
