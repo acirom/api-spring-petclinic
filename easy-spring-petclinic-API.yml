@@ -64,7 +64,7 @@ spec:
                   schema:
                     type: string
               content:
-                application/json:
+                application/xml:
                   schema:
                     type: array
                     items:
