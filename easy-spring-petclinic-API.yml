@@ -64,6 +64,9 @@ spec:
                   schema:
                     type: string
               content:
+                text/html:
+                  schema:
+                    $ref: '#/components/schemas/OwnerFields'
                 application/xml:
                   schema:
                     $ref: '#/components/schemas/OwnerFields'
