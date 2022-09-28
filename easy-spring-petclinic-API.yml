@@ -40,7 +40,7 @@ spec:
     - name: visit
       description: Endpoints related to vet visits.
     paths:
-      /owner:
+      /owners:
         get:
           tags:
           - owner
