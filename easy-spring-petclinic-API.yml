@@ -64,11 +64,12 @@ spec:
                   schema:
                     type: string
               content:
-                text/html:
+                application/xml:
                   schema:
-                    type: array
-                    items:
-                      $ref: '#/components/schemas/OwnerFields'
+                    $ref: '#/components/schemas/OwnerFields'
+                application/json:
+                  schema:
+                    $ref: '#/components/schemas/OwnerFields'
     components:
       schemas:
         OwnerFields:
