@@ -6,59 +6,60 @@ metadata:
   tags:
     - owner
 spec:
+  type: openapi
   lifecycle: experimental
   owner: teamacic
   definition: |
-openapi: 3.0.1
-info:
-  title: Spring PetClinic
-  description: Spring PetClinic Sample Application.
-  license:
-    name: Apache 2.0
-    url: http://www.apache.org/licenses/LICENSE-2.0
-  version: '1.0'
-servers:
-- url: http://spring-petclinic.cnr.tap.tanzu.vxlab.local
-tags:
-- name: owner
-  description: Endpoints related to pet owners.
-paths:
-  /owners:
-    get:
-      tags:
-      - owner
-      operationId: listOwners
-      summary: Lists pet owners
-      description: Returns an array of pet owners.
-      responses:
-        200:
-          description: Owner details found and returned.
-          headers:
-            ETag:
-              description: An ID for this version of the response.
-              schema:
-                type: string
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Owner'
-components:
-  schemas:
-    Owner:
-      title: Owner
-      description: A pet owner.
-      allOf:
-        - type: object
-          properties:
-            id:
-              title: ID
-              description: The ID of the pet owner.
-              type: integer
-              format: int32
-              minimum: 0
-              example: 1
-              readOnly: true
-          required: 
-          - id
+    openapi: 3.0.1
+    info:
+      title: Spring PetClinic
+      description: Spring PetClinic Sample Application.
+      license:
+        name: Apache 2.0
+        url: http://www.apache.org/licenses/LICENSE-2.0
+      version: '1.0'
+    servers:
+    - url: http://spring-petclinic.cnr.tap.tanzu.vxlab.local
+    tags:
+    - name: owner
+      description: Endpoints related to pet owners.
+    paths:
+      /owners:
+        get:
+          tags:
+          - owner
+          operationId: listOwners
+          summary: Lists pet owners
+          description: Returns an array of pet owners.
+          responses:
+            200:
+              description: Owner details found and returned.
+              headers:
+                ETag:
+                  description: An ID for this version of the response.
+                  schema:
+                    type: string
+              content:
+                application/json:
+                  schema:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Owner'
+    components:
+      schemas:
+        Owner:
+          title: Owner
+          description: A pet owner.
+          allOf:
+            - type: object
+              properties:
+                id:
+                  title: ID
+                  description: The ID of the pet owner.
+                  type: integer
+                  format: int32
+                  minimum: 0
+                  example: 1
+                  readOnly: true
+              required: 
+              - id
