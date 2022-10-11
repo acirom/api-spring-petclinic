@@ -47,10 +47,60 @@ spec:
                       $ref: '#/components/schemas/Owner'
     components:
       schemas:
+        OwnerFields:
+          title: Owner fields
+          description: Editable fields of a pet owner.
+          type: object
+          properties:
+            firstName:
+              title: First name
+              description: The first name of the pet owner.
+              type: string
+              minLength: 1
+              maxLength: 30
+              pattern: '^[a-zA-Z]*$'
+              example: George
+            lastName:
+              title: Last name
+              description: The last name of the pet owner.
+              type: string
+              minLength: 1
+              maxLength: 30
+              pattern: '^[a-zA-Z]*$'
+              example: Franklin
+            address:
+              title: Address
+              description: The postal address of the pet owner.
+              type: string
+              minLength: 1
+              maxLength: 255
+              example: '110 W. Liberty St.'
+            city:
+              title: City
+              description: The city of the pet owner.
+              type: string
+              minLength: 1
+              maxLength: 80
+              example: Madison
+            telephone:
+              title: Telephone number
+              description: The telephone number of the pet owner.
+              type: string
+              minLength: 1
+              maxLength: 20
+              pattern: '^[0-9]*$'
+              example: '6085551023'
+          required:
+            - firstName
+            - lastName
+            - address
+            - city
+            - telephone
         Owner:
           title: Owner
-          description: Owner List.
+          description: A pet owner.
           allOf:
+            - $ref: '#/components/schemas/OwnerFields'
             - type: object
               properties:
                 id:
@@ -61,37 +111,162 @@ spec:
                   minimum: 0
                   example: 1
                   readOnly: true
-                Name:
-                  title: Name
-                  description: The name of Owner.
-                  type: string
-                  minLength: 1
-                  maxLength: 30
-                  pattern: '^[a-zA-Z]*$'
-                  example: George Franklin
-                Address:
-                  title: Address
-                  description: The Address of Owner.
-                  type: string
-                  minLength: 1
-                  maxLength: 30
-                  pattern: '^[a-zA-Z]*$'
-                  example: 110 W. Liberty St.
-                City:
-                  title: City
-                  description: The City of Owner.
-                  type: string
-                  minLength: 1
-                  maxLength: 30
-                  pattern: '^[a-zA-Z]*$'
-                  example: Madison
-                Pets:
+                pets:
                   title: Pets
-                  description: The Pet of Owner.
-                  type: string
-                  minLength: 1
-                  maxLength: 30
-                  pattern: '^[a-zA-Z]*$'
-                  example: Leo
+                  description: The pets owned by this individual including any booked vet visits.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Pet'
+                  readOnly: true
               required: 
               - id
+              - pets
+        PetFields:
+          title: Pet fields
+          description: Editable fields of a pet.
+          type: object
+          properties:
+            name:
+              title: Name
+              description: The name of the pet.
+              type: string
+              maxLength: 30
+              example: Leo
+            birthDate:
+              title: Birth date
+              description: The date of birth of the pet.
+              type: string
+              format: date
+              example: '2010-09-07'
+            typeId:
+              title: Type
+              description: The type of the pet.
+              type: integer
+              format: int32
+              example: 1
+        Pet:
+          title: Pet
+          description: A pet.
+          allOf:
+            - $ref: '#/components/schemas/PetFields'
+            - type: object
+              properties:
+                id:
+                  title: ID
+                  description: The ID of the pet.
+                  type: integer
+                  format: int32
+                  minimum: 0
+                  example: 1
+                  readOnly: true
+                type:
+                  $ref: '#/components/schemas/PetType'
+                visits:
+                  title: Visits
+                  description: Vet visit bookings for this pet.
+                  type: array
+                  items:
+                    $ref: '#/components/schemas/Visit'
+                  readOnly: true
+              required:
+                - id
+                - type
+                - visits
+        Vet:
+          title: Vet
+          description: A veterinarian.
+          type: object
+          properties:
+            id:
+              title: ID
+              description: The ID of the vet.
+              type: integer
+              format: int32
+              minimum: 0
+              example: 1
+              readOnly: true
+            firstName:
+              title: First name
+              description: The first name of the vet.
+              type: string
+              minLength: 1
+              maxLength: 30
+              pattern: '^[a-zA-Z]*$'
+              example: 'James'
+            lastName:
+              title: Last name
+              description: The last name of the vet.
+              type: string
+              minLength: 1
+              maxLength: 30
+              pattern: '^[a-zA-Z]*$'
+              example: 'Carter'
+            specialties:
+              title: Specialties
+              description: The specialties of the vet.
+              type: array
+              items:
+                $ref: '#/components/schemas/Specialty'
+          required:
+            - id
+            - firstName
+            - lastName
+            - specialties
+        VisitFields:
+          title: Visit fields
+          description: Editable fields of a vet visit.
+          type: object
+          properties:
+            date:
+              title: Date
+              description: The date of the visit.
+              type: string
+              format: date
+              example: '2013-01-01'
+            description:
+              title: Description
+              description: The description for the visit.
+              type: string
+              minLength: 1
+              maxLength: 255
+              example: 'rabies shot'
+          required:
+            - description
+        Visit:
+          title: Visit
+          description: A booking for a vet visit.
+          allOf:
+            - $ref: '#/components/schemas/VisitFields'
+            - type: object
+              properties:
+                id:
+                  title: ID
+                  description: The ID of the visit.
+                  type: integer
+                  format: int32
+                  minimum: 0
+                  example: 1
+                  readOnly: true
+              required:
+                - id
+        PetType:
+          title: Pet type
+          description: A pet type.
+          type: object
+          properties:
+            id:
+              title: ID
+              description: The ID of the pet type.
+              type: integer
+              format: int32
+              minimum: 0
+              example: 1
+              readOnly: true
+            name:
+              title: Name
+              description: The name of the pet type.
+              type: string
+              maxLength: 80
+              example: cat
+          required: 
+            - id
