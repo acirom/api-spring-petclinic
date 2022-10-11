@@ -9,10 +9,6 @@ metadata:
     - pet
     - vet
     - visit
-  links:
-    - url: http://spring-petclinic.cnr.tap.tanzu.vxlab.local
-      title: GitHub Repo
-      icon: github
 spec:
   lifecycle: experimental
   owner: teamacic
