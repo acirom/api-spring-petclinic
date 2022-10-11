@@ -1,0 +1,156 @@
+apiVersion: backstage.io/v1alpha1
+kind: API
+metadata:
+  name: springpetclinicapiget
+  description: The spring-petclinic API
+  tags:
+    - failing
+    - owner
+    - pet
+    - vet
+    - visit
+spec:
+  lifecycle: experimental
+  owner: teamacic
+  definition: |
+openapi: 3.0.1
+info:
+  title: Spring PetClinic
+  description: Spring PetClinic Sample Application.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0
+  version: '1.0'
+servers:
+- url: http://spring-petclinic.cnr.tap.tanzu.vxlab.local
+tags:
+- name: failing
+  description: Endpoint which always returns an error.
+- name: owner
+  description: Endpoints related to pet owners.
+- name: pet
+  description: Endpoints related to pets.
+- name: vet
+  description: Endpoints related to vets.
+- name: visit
+  description: Endpoints related to vet visits.
+paths:
+  /owners:
+    get:
+      tags:
+      - owner
+      operationId: listOwners
+      summary: Lists pet owners
+      description: Returns an array of pet owners.
+      parameters:
+      - name: lastName
+        in: query
+        description: Last name.
+        required: true
+        schema:
+          type: string
+          example: Davis
+      responses:
+        200:
+          description: Owner details found and returned.
+          headers:
+            ETag:
+              description: An ID for this version of the response.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Owner'
+components:
+  schemas:
+    Owner:
+      title: Owner
+      description: A pet owner.
+      allOf:
+        - type: object
+          properties:
+            id:
+              title: ID
+              description: The ID of the pet owner.
+              type: integer
+              format: int32
+              minimum: 0
+              example: 1
+              readOnly: true
+            pets:
+              title: Pets
+              description: The pets owned by this individual including any booked vet visits.
+              type: array
+              items:
+                $ref: '#/components/schemas/Pet'
+              readOnly: true
+          required: 
+          - id
+          - pets
+    PetFields:
+      title: Pet fields
+      description: Editable fields of a pet.
+      type: object
+      properties:
+        name:
+          title: Name
+          description: The name of the pet.
+          type: string
+          maxLength: 30
+          example: Leo
+        birthDate:
+          title: Birth date
+          description: The date of birth of the pet.
+          type: string
+          format: date
+          example: '2010-09-07'
+        typeId:
+          title: Type
+          description: The type of the pet.
+          type: integer
+          format: int32
+          example: 1
+    Pet:
+      title: Pet
+      description: A pet.
+      allOf:
+        - $ref: '#/components/schemas/PetFields'
+        - type: object
+          properties:
+            id:
+              title: ID
+              description: The ID of the pet.
+              type: integer
+              format: int32
+              minimum: 0
+              example: 1
+              readOnly: true
+            type:
+              $ref: '#/components/schemas/PetType'
+          required:
+            - id
+            - type
+    PetType:
+      title: Pet type
+      description: A pet type.
+      type: object
+      properties:
+        id:
+          title: ID
+          description: The ID of the pet type.
+          type: integer
+          format: int32
+          minimum: 0
+          example: 1
+          readOnly: true
+        name:
+          title: Name
+          description: The name of the pet type.
+          type: string
+          maxLength: 80
+          example: cat
+      required: 
+        - id
