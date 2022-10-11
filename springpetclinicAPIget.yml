@@ -4,11 +4,8 @@ metadata:
   name: springpetclinicapiget
   description: The spring-petclinic API
   tags:
-    - failing
     - owner
     - pet
-    - vet
-    - visit
 spec:
   lifecycle: experimental
   owner: teamacic
@@ -24,16 +21,10 @@ info:
 servers:
 - url: http://spring-petclinic.cnr.tap.tanzu.vxlab.local
 tags:
-- name: failing
-  description: Endpoint which always returns an error.
 - name: owner
   description: Endpoints related to pet owners.
 - name: pet
   description: Endpoints related to pets.
-- name: vet
-  description: Endpoints related to vets.
-- name: visit
-  description: Endpoints related to vet visits.
 paths:
   /owners:
     get:
@@ -42,14 +33,6 @@ paths:
       operationId: listOwners
       summary: Lists pet owners
       description: Returns an array of pet owners.
-      parameters:
-      - name: lastName
-        in: query
-        description: Last name.
-        required: true
-        schema:
-          type: string
-          example: Davis
       responses:
         200:
           description: Owner details found and returned.
