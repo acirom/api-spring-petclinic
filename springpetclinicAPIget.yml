@@ -31,6 +31,14 @@ spec:
           operationId: listOwners
           summary: Lists pet owners
           description: Returns an array of pet owners.
+          parameters:
+          - name: lastName
+            in: query
+            description: Last name.
+            required: false
+            schema:
+              type: string
+              example: Davis
           responses:
             200:
               description: Owner details found and returned.
