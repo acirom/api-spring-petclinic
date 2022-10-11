@@ -49,7 +49,7 @@ spec:
       schemas:
         Owner:
           title: Owner
-          description: A pet owner.
+          description: Owner List.
           allOf:
             - type: object
               properties:
@@ -61,5 +61,37 @@ spec:
                   minimum: 0
                   example: 1
                   readOnly: true
+                Name:
+                  title: Name
+                  description: The name of Owner.
+                  type: string
+                  minLength: 1
+                  maxLength: 30
+                  pattern: '^[a-zA-Z]*$'
+                  example: George Franklin
+                Address:
+                  title: Address
+                  description: The Address of Owner.
+                  type: string
+                  minLength: 1
+                  maxLength: 30
+                  pattern: '^[a-zA-Z]*$'
+                  example: 110 W. Liberty St.
+                City:
+                  title: City
+                  description: The City of Owner.
+                  type: string
+                  minLength: 1
+                  maxLength: 30
+                  pattern: '^[a-zA-Z]*$'
+                  example: Madison
+                Pets:
+                  title: Pets
+                  description: The Pet of Owner.
+                  type: string
+                  minLength: 1
+                  maxLength: 30
+                  pattern: '^[a-zA-Z]*$'
+                  example: Leo
               required: 
               - id
