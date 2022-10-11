@@ -5,7 +5,6 @@ metadata:
   description: The spring-petclinic API
   tags:
     - owner
-    - pet
 spec:
   lifecycle: experimental
   owner: teamacic
@@ -23,8 +22,6 @@ servers:
 tags:
 - name: owner
   description: Endpoints related to pet owners.
-- name: pet
-  description: Endpoints related to pets.
 paths:
   /owners:
     get:
@@ -63,77 +60,5 @@ components:
               minimum: 0
               example: 1
               readOnly: true
-            pets:
-              title: Pets
-              description: The pets owned by this individual including any booked vet visits.
-              type: array
-              items:
-                $ref: '#/components/schemas/Pet'
-              readOnly: true
           required: 
           - id
-          - pets
-    PetFields:
-      title: Pet fields
-      description: Editable fields of a pet.
-      type: object
-      properties:
-        name:
-          title: Name
-          description: The name of the pet.
-          type: string
-          maxLength: 30
-          example: Leo
-        birthDate:
-          title: Birth date
-          description: The date of birth of the pet.
-          type: string
-          format: date
-          example: '2010-09-07'
-        typeId:
-          title: Type
-          description: The type of the pet.
-          type: integer
-          format: int32
-          example: 1
-    Pet:
-      title: Pet
-      description: A pet.
-      allOf:
-        - $ref: '#/components/schemas/PetFields'
-        - type: object
-          properties:
-            id:
-              title: ID
-              description: The ID of the pet.
-              type: integer
-              format: int32
-              minimum: 0
-              example: 1
-              readOnly: true
-            type:
-              $ref: '#/components/schemas/PetType'
-          required:
-            - id
-            - type
-    PetType:
-      title: Pet type
-      description: A pet type.
-      type: object
-      properties:
-        id:
-          title: ID
-          description: The ID of the pet type.
-          type: integer
-          format: int32
-          minimum: 0
-          example: 1
-          readOnly: true
-        name:
-          title: Name
-          description: The name of the pet type.
-          type: string
-          maxLength: 80
-          example: cat
-      required: 
-        - id
