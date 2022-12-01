@@ -19,7 +19,7 @@ spec:
         url: http://www.apache.org/licenses/LICENSE-2.0
       version: '1.0'
     servers:
-    - url: http://spring-petclinic.cnr.tap.tanzu.vxlab.local
+    - url: http://tap-spring-petclinic-git.cnr.tap.tanzu.vxlab.local
     tags:
     - name: owner
       description: Endpoints related to pet owners.
